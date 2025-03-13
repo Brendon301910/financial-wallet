@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+dist/
+yarn.lock
+
+# Prisma
+prisma/dev.db
+prisma/migrations/
+
+# Environment files
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
