@@ -1,6 +1,6 @@
+import Decimal from 'decimal.js';
+import { handleSafeParseZod } from 'src/lib/handleSafeParseZod';
 import { z } from 'zod';
-import { Decimal } from '@prisma/client/runtime/library';
-import { handleSafeParseZod } from '../lib/handleSafeParseZod';
 
 export interface UserProps {
   id?: string;
@@ -9,7 +9,6 @@ export interface UserProps {
   password: string;
   balance: Decimal;
 }
-
 export class User {
   private _id?: string;
   private _name: string;
@@ -32,8 +31,10 @@ export class User {
       email: z.string().email('Invalid email format'),
       password: z.string().min(6, 'Password must have at least 6 characters'),
       balance: z
-        .instanceof(Decimal)
-        .refine((value) => value.gte(new Decimal(0)), {
+        .instanceof(Decimal, {
+          message: 'Balance must be a valid Decimal instance',
+        })
+        .refine((decimalValue) => decimalValue.gte(new Decimal(0)), {
           message: 'Balance must be greater than or equal to zero',
         }),
     });
@@ -43,10 +44,9 @@ export class User {
     if (!result.success) throw handleSafeParseZod(result);
   }
 
-  public get id(): string | undefined {
+  public get id(): string {
     return this._id;
   }
-
   public get name(): string {
     return this._name;
   }

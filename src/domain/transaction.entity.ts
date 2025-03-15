@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Decimal } from '@prisma/client/runtime/library';
+import Decimal from 'decimal.js'; // Importando corretamente o Decimal
 import { handleSafeParseZod } from '../lib/handleSafeParseZod';
 
 export interface TransactionProps {
@@ -7,7 +7,7 @@ export interface TransactionProps {
   senderId: string;
   receiverId: string;
   amount: Decimal;
-  status: 'pending' | 'completed' | 'reversed';
+  status?: 'pending' | 'completed' | 'reversed';
   createdAt?: Date;
 }
 
@@ -25,7 +25,7 @@ export class Transaction {
     this._senderId = props.senderId;
     this._receiverId = props.receiverId;
     this._amount = props.amount;
-    this._status = props.status;
+    this._status = props.status || 'pending'; // Definindo o status como 'pending' por padrão
     this._createdAt = props.createdAt || new Date();
   }
 
@@ -34,11 +34,10 @@ export class Transaction {
       senderId: z.string().uuid('Invalid sender ID'),
       receiverId: z.string().uuid('Invalid receiver ID'),
       amount: z
-        .instanceof(Decimal)
+        .instanceof(Decimal) // Garantir que o amount é um Decimal
         .refine((value) => value.gt(new Decimal(0)), {
           message: 'Amount must be greater than zero',
         }),
-      status: z.enum(['pending', 'completed', 'reversed']),
       createdAt: z.date().optional(),
     });
 

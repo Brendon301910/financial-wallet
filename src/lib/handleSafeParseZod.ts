@@ -1,8 +1,7 @@
-import { z } from 'zod';
+export function handleSafeParseZod(result: any): Error {
+  const errorMessage = result.error.issues
+    .map((issue) => issue.message)
+    .join(', '); // Concatena todas as mensagens de erro
 
-export const handleSafeParseZod = <T>(error: z.SafeParseError<T>) =>
-  new Error(
-    error.error.issues
-      .map((e) => `${e.path}: ${e.code} - ${e.message}`)
-      .join('; '),
-  );
+  return new Error(errorMessage); // Retorna uma única mensagem de erro com as mensagens de validação
+}

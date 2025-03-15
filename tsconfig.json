@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "types": ["node", "jest"],
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "infra/http/*": ["src/infra/http/*"],
+      "infra/database/*": ["src/infra/prisma/database/*"],
+      "infra/repositories/*": ["src/infra/repositories/*"],
+      "application/*": ["src/application/*"],
+      "domain/*": ["src/domain/*"]
+    },
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

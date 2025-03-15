@@ -17,6 +17,8 @@ model User {
   id                   String         @id @default(uuid())
   email                String         @unique
   password             String
+  name                 String
+  balance              Decimal        @default(0)
   wallet               Wallet?
   createdAt            DateTime       @default(now())
   transactionsSent     Transaction[]  @relation("Sender")
@@ -25,9 +27,8 @@ model User {
 }
 
 model Wallet {
-  id      String  @id @default(uuid())
-  userId  String  @unique
-  balance Decimal @default(0)
+  id     String @id @default(uuid())
+  userId String @unique
 
   user User @relation(fields: [userId], references: [id])
 }
