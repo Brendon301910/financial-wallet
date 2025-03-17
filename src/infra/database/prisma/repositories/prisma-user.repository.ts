@@ -10,7 +10,6 @@ export class PrismaUserRepository implements IUserRepository {
   constructor(private prisma: PrismaService) {}
 
   async findById(id: string): Promise<User | null> {
-    // Buscar o usuário pelo id no banco de dados
     const userData = await this.prisma.user.findUnique({
       where: { id: id },
     });
@@ -21,7 +20,7 @@ export class PrismaUserRepository implements IUserRepository {
       return result;
     }
   }
-  // Buscar usuário por email
+
   async findByEmail(email: string): Promise<User | null> {
     const prismaUser = await this.prisma.user.findUnique({
       where: { email: email },
@@ -34,18 +33,16 @@ export class PrismaUserRepository implements IUserRepository {
     }
   }
 
-  // Salvar usuário no banco
   async save(user: User): Promise<void> {
     await this.prisma.user.create({
       data: UserMapper.toPrisma(user),
     });
   }
 
-  // Atualizar dados do usuário
   async update(user: User): Promise<void> {
     await this.prisma.user.update({
-      where: { email: user.email }, // Assume que o email é único e serve como chave de busca
-      data: { balance: user.balance.toString() }, // Atualiza o saldo
+      where: { email: user.email },
+      data: { balance: user.balance.toString() },
     });
   }
 }

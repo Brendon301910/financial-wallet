@@ -42,10 +42,9 @@ export class UserController {
     const response = await this.createUser.execute(user);
 
     if (response.error) {
-      // Lançando o erro com a mensagem diretamente da camada de domínio
       throw new HttpException(
         {
-          message: response.error.message, // A mensagem de erro que vem do domínio
+          message: response.error.message,
           statusCode: HttpStatus.BAD_REQUEST,
           timestamp: new Date().toISOString(),
         },

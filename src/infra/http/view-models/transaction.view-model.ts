@@ -12,7 +12,7 @@ export class TransactionViewModel {
     this.id = transaction.id!;
     this.senderId = transaction.senderId;
     this.receiverId = transaction.receiverId;
-    this.amount = transaction.amount.toString(); // Convertendo Decimal para string para exibição
+    this.amount = transaction.amount.toString();
     this.status = transaction.status;
     this.createdAt = transaction.createdAt;
   }

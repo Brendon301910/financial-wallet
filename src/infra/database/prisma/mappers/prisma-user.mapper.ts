@@ -8,7 +8,7 @@ export class UserMapper {
       email: userPrisma.email,
       password: userPrisma.password,
       name: userPrisma.name,
-      balance: new Decimal(userPrisma.balance), // 🔹 Converte para Decimal
+      balance: new Decimal(userPrisma.balance),
       id: userPrisma.id,
     });
   }
@@ -18,7 +18,7 @@ export class UserMapper {
       email: userDomain.email,
       password: userDomain.password,
       name: userDomain.name,
-      balance: userDomain.balance, // Já está como Decimal
+      balance: userDomain.balance,
       createdAt: new Date(),
     };
   }

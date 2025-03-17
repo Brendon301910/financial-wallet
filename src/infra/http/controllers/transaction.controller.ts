@@ -42,10 +42,9 @@ export class TransactionController {
     });
 
     if (error) {
-      // Lançando o erro com a mensagem diretamente da camada de domínio
       throw new HttpException(
         {
-          message: error.message, // A mensagem de erro que vem do domínio
+          message: error.message,
           statusCode: HttpStatus.BAD_REQUEST,
           timestamp: new Date().toISOString(),
         },
@@ -60,10 +59,9 @@ export class TransactionController {
     });
 
     if (response.error) {
-      // Lançando o erro com a mensagem diretamente da camada de domínio
       throw new HttpException(
         {
-          message: response.error.message, // A mensagem de erro que vem da camada de aplicação
+          message: response.error.message,
           statusCode: HttpStatus.BAD_REQUEST,
           timestamp: new Date().toISOString(),
         },

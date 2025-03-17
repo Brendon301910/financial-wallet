@@ -21,7 +21,6 @@ export class PrismaTransactionRepository implements ITransactionRepository {
   }
 
   async findById(id: string): Promise<Transaction | null> {
-    // Buscar o usuário pelo id no banco de dados
     const transactionData = await this.prisma.transaction.findUnique({
       where: { id: id },
     });

@@ -60,8 +60,8 @@ model Reversal {
 model Notification {
   id            String   @id @default(uuid())
   userId        String
-  transactionId String? // Opcional, pode ser uma notificação geral
-  reversalId    String? // Opcional, pra avisar sobre reversão
+  transactionId String?
+  reversalId    String?
   message       String
   read          Boolean  @default(false)
   createdAt     DateTime @default(now())

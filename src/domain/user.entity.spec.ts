@@ -5,7 +5,7 @@ import { User } from './user.entity';
 describe('User', () => {
   it('deve lançar um erro se o nome for menor que 3 caracteres', () => {
     const invalidUserProps = {
-      name: 'Jo', // Nome inválido (menor que 3 caracteres)
+      name: 'Jo',
       email: 'john.doe@example.com',
       password: 'password123',
       balance: new Decimal(100),
@@ -20,7 +20,7 @@ describe('User', () => {
   it('deve lançar um erro se o email for inválido', () => {
     const invalidUserProps = {
       name: 'John Doe',
-      email: 'invalid-email', // Email inválido
+      email: 'invalid-email',
       password: 'password123',
       balance: new Decimal(100),
     };
@@ -35,7 +35,7 @@ describe('User', () => {
     const invalidUserProps = {
       name: 'John Doe',
       email: 'john.doe@example.com',
-      password: '12345', // Senha inválida (menor que 6 caracteres)
+      password: '12345',
       balance: new Decimal(100),
     };
 
@@ -50,7 +50,7 @@ describe('User', () => {
       name: 'John Doe',
       email: 'john.doe@example.com',
       password: 'password123',
-      balance: new Decimal(-100), // Saldo inválido (negativo)
+      balance: new Decimal(-100),
     };
 
     const [user, error] = User.create(invalidUserProps);

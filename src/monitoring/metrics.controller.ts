@@ -1,17 +1,17 @@
 import { Controller, Get } from '@nestjs/common';
-import { MonitoringService } from './monitoring.service'; // Corrigir o caminho de importação do service
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'; // Importação das anotações do Swagger
+import { MonitoringService } from './monitoring.service';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Metrics') // Define o nome da categoria das métricas no Swagger
+@ApiTags('Metrics')
 @Controller('metrics')
 export class MetricsController {
   constructor(private readonly monitoringService: MonitoringService) {}
 
-  @ApiOperation({ summary: 'Get application metrics' }) // Adicionando a operação no Swagger
+  @ApiOperation({ summary: 'Get application metrics' })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved the metrics',
-    type: String, // O retorno será uma string, como o conteúdo do endpoint /metrics
+    type: String,
   })
   @ApiResponse({
     status: 500,
@@ -19,6 +19,6 @@ export class MetricsController {
   })
   @Get()
   async getMetrics(): Promise<string> {
-    return this.monitoringService.getMetrics(); // Espera a Promise ser resolvida
+    return this.monitoringService.getMetrics();
   }
 }

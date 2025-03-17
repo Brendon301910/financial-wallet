@@ -8,7 +8,7 @@ import {
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IReverseTransactionContract } from 'application/contracts/contracts/reverse-transaction.contract';
 
-import { Reversal } from 'domain/reversal.entity'; // Entidade Reversal
+import { Reversal } from 'domain/reversal.entity';
 import { ReversalViewModel } from '../view-models/reverse-transaction.view-model';
 import { CreateReversalDto } from '../dtos/reverse-transaction.dto';
 
@@ -31,14 +31,12 @@ export class ReversalController {
   async create(@Body() body: CreateReversalDto) {
     const { transactionId, reason } = body;
 
-    // Criando a reversão a partir do domínio
     const [reversal, error] = Reversal.create({
       transactionId,
       reason,
     });
 
     if (error) {
-      // Lançando erro com a mensagem da camada de domínio
       throw new HttpException(
         {
           message: error.message,
@@ -55,7 +53,6 @@ export class ReversalController {
     });
 
     if (response.error) {
-      // Lançando erro com a mensagem da camada de aplicação
       throw new HttpException(
         {
           message: response.error.message,
@@ -66,6 +63,6 @@ export class ReversalController {
       );
     }
 
-    return new ReversalViewModel(response.reversal!); // Retornando a view model de reversão
+    return new ReversalViewModel(response.reversal!);
   }
 }

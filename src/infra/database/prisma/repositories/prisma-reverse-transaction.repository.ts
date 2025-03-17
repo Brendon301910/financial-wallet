@@ -8,13 +8,11 @@ import { ReversalMapper } from '../mappers/reverse-transaction.mapper';
 export class PrismaReversalRepository implements IReversalRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  // Salva a reversão no banco de dados
   async save(reversal: Reversal): Promise<void> {
     const data = ReversalMapper.toPrisma(reversal);
     await this.prisma.reversal.create({ data });
   }
 
-  // Atualiza a reversão (caso necessário)
   async update(reversal: Reversal): Promise<void> {
     await this.prisma.reversal.update({
       where: { id: reversal.id },

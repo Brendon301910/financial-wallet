@@ -9,7 +9,7 @@ import { IReversalRepository } from 'application/contracts/repositories/reversal
 import { MonitoringModule } from 'src/monitoring/monitoring.module';
 
 @Module({
-  imports: [MonitoringModule], // Adicione o MonitoringModule aqui
+  imports: [MonitoringModule],
   providers: [
     PrismaService,
     PrismaUserRepository,

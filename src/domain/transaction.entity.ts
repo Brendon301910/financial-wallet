@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import Decimal from 'decimal.js'; // Importando corretamente o Decimal
+import Decimal from 'decimal.js';
 import { handleSafeParseZod } from '../lib/handleSafeParseZod';
 
 export interface TransactionProps {
@@ -25,7 +25,7 @@ export class Transaction {
     this._senderId = props.senderId;
     this._receiverId = props.receiverId;
     this._amount = props.amount;
-    this._status = props.status || 'pending'; // Definindo o status como 'pending' por padrão
+    this._status = props.status || 'pending';
     this._createdAt = props.createdAt || new Date();
   }
 
@@ -34,7 +34,7 @@ export class Transaction {
       senderId: z.string().uuid('Invalid sender ID'),
       receiverId: z.string().uuid('Invalid receiver ID'),
       amount: z
-        .instanceof(Decimal) // Garantir que o amount é um Decimal
+        .instanceof(Decimal)
         .refine((value) => value.gt(new Decimal(0)), {
           message: 'Amount must be greater than zero',
         }),

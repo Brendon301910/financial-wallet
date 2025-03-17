@@ -1,4 +1,4 @@
-import { Transaction } from './transaction.entity'; // Ajuste conforme o caminho correto
+import { Transaction } from './transaction.entity';
 import Decimal from 'decimal.js';
 
 describe('Transaction', () => {
@@ -19,7 +19,7 @@ describe('Transaction', () => {
       expect(transaction.amount.toString()).toBe(
         validTransactionProps.amount.toString(),
       );
-      expect(transaction.status).toBe('pending'); // Status padrão
+      expect(transaction.status).toBe('pending');
     }
   });
 

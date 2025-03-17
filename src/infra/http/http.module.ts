@@ -15,7 +15,7 @@ import { MonitoringModule } from 'src/monitoring/monitoring.module';
 import { LoggerModule } from '../logger/logger.module';
 
 @Module({
-  imports: [DatabaseModule, MonitoringModule, LoggerModule], // Adicione o MonitoringModule aqui
+  imports: [DatabaseModule, MonitoringModule, LoggerModule],
   controllers: [UserController, TransactionController, ReversalController],
   providers: [
     {
