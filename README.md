@@ -82,6 +82,26 @@ Este projeto usa **Prometheus** para monitoramento e **Winston** para logging:
 - **Prometheus**: Coleta métricas da aplicação, como contagem de requisições e status de erros.
 - **Winston**: Gera logs estruturados, permitindo acompanhar o comportamento da aplicação em diferentes ambientes.
 
+## **Consulta de IDs no Banco**
+
+⚠️ Importante: No momento atual do projeto, os IDs das transações e dos usuários precisam ser identificados diretamente no banco de dados.
+
+Buscar o ID de um Usuário
+Para encontrar o ID de um usuário cadastrado, execute a seguinte query no PostgreSQL:
+
+```
+SELECT id, email FROM "User";
+```
+
+Buscar o ID de uma Transação
+Para encontrar o ID de uma transação específica, utilize:
+
+```
+SELECT id, amount, created_at FROM "Transaction";
+```
+
+Isso será melhorado em versões futuras do projeto.
+
 ## **Rotas e Endpoints**
 
 - **POST /users**: Cria um novo usuário
