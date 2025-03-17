@@ -12,4 +12,24 @@ export class PrismaTransactionRepository implements ITransactionRepository {
     const data = TransactionMapper.toPrisma(transaction);
     await this.prisma.transaction.create({ data });
   }
+
+  async update(transaction: Transaction): Promise<void> {
+    await this.prisma.transaction.update({
+      where: { id: transaction.id },
+      data: { status: transaction.status },
+    });
+  }
+
+  async findById(id: string): Promise<Transaction | null> {
+    // Buscar o usuário pelo id no banco de dados
+    const transactionData = await this.prisma.transaction.findUnique({
+      where: { id: id },
+    });
+
+    if (!transactionData) return null;
+    else {
+      const result = TransactionMapper.toDomain(transactionData);
+      return result;
+    }
+  }
 }
