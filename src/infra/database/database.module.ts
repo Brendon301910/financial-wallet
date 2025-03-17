@@ -2,18 +2,19 @@ import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaUserRepository } from './prisma/repositories/prisma-user.repository';
 import { PrismaTransactionRepository } from './prisma/repositories/prisma-transaction.repository';
-
+import { PrismaReversalRepository } from './prisma/repositories/prisma-reverse-transaction.repository';
 import { IUserRepository } from 'application/contracts/repositories/user.repository';
 import { ITransactionRepository } from 'application/contracts/repositories/transaction.repository';
-import { IReversalRepository } from 'application/contracts/repositories/reversal.repository'; // Importe o contrato do repositório de reversão
-import { PrismaReversalRepository } from './prisma/repositories/prisma-reverse-transaction.repository';
+import { IReversalRepository } from 'application/contracts/repositories/reversal.repository';
+import { MonitoringModule } from 'src/monitoring/monitoring.module';
 
 @Module({
+  imports: [MonitoringModule], // Adicione o MonitoringModule aqui
   providers: [
     PrismaService,
     PrismaUserRepository,
     PrismaTransactionRepository,
-    PrismaReversalRepository, // Adicione o repositório de reversão aos provedores
+    PrismaReversalRepository,
     {
       provide: IUserRepository,
       useClass: PrismaUserRepository,
@@ -24,13 +25,9 @@ import { PrismaReversalRepository } from './prisma/repositories/prisma-reverse-t
     },
     {
       provide: IReversalRepository,
-      useClass: PrismaReversalRepository, // Adicione a injeção do repositório de reversão
+      useClass: PrismaReversalRepository,
     },
   ],
-  exports: [
-    IUserRepository,
-    ITransactionRepository,
-    IReversalRepository, // Exporte o contrato de repositório de reversão
-  ],
+  exports: [IUserRepository, ITransactionRepository, IReversalRepository],
 })
 export class DatabaseModule {}

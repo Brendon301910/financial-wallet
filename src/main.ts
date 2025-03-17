@@ -3,9 +3,12 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { CustomLoggerService } from './infra/logger/logger.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: new CustomLoggerService(),
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({
